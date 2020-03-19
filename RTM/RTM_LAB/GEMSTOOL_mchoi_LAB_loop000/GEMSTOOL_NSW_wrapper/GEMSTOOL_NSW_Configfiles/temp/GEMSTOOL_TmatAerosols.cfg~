@@ -1,0 +1,57 @@
+T                                        ! Bimodal
+0.5                                      ! Volume fraction
+F                          T             ! Use of equivalent-surface-sphere representation (Keep)
+-1                                       ! NONspherical type (spheroids, cylinders, Chebyshevs)
+2,2                                      ! Number of Quadrature weights  (Surface integration) (Keep)
+0.001                                    ! Accuracy (Keep)
+4,4                                      ! Particle Size Distribution indices *M
+0.080132,0.7054                          ! First  PSD parameter values        *M
+1.492,2.075                              ! Second PSD parameter values        *M
+0.0,0.0                                  ! Third  PSD parameter values        *M
+20,20                                    ! Number of Quadrature weights (PSD integration)      *M
+T,T                                      ! Use particle radius cutoff to fix Rmin/Rmax (Keep)
+1.0E-6,1.0E-6                            ! Particle radius cutoff (Keep)
+0.0207, 0.0207                           ! Minimum particle radii (Microns)   *M
+1.75, 1.75                               ! Maximum particle radii (Microns)   *M
+1.5,1.5                                  ! Real parts of refractive index     *M
+0.0200,0.0200                            ! Imaginary part of refractive index *M
+1.7, 1.7                                 ! Shape factors 
+
+      OPEN(1,file=adjustl(trim(ConfigPath))//'GEMSTOOL_TmatAerosols.cfg',err=90,status='old')
+ 
+ !  Bimodal control
+
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%do_bimodal                                             ! Flag for Bimodal aerosol
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%bimodal_fraction                                       ! Bimodal fraction
+
+!  Orientation control
+
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%Do_EqSaSphere                                          ! Tmat flag for equivalent-surface-sphere representation
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%Tmat_Sphtype                                           ! Tmat Type of Spheroidal particle
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%Tmat_ndgs(1),GEMSTOOL_INPUTS%MieTmat%Tmat_ndgs(2)      ! Tmat Gaussian surface integration numbers
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%Tmat_accuracy                                          ! Tmat Accuracy for the computation
+
+!  PSD parameters
+
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%PSDindex(1),  GEMSTOOL_INPUTS%MieTmat%PSDindex(2)      ! Tmat Particle Size Distribution (PSD) indices
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%PSDpars(1,1), GEMSTOOL_INPUTS%MieTmat%PSDpars(1,2)     ! Tmat PSD First  parameter values
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%PSDpars(2,1), GEMSTOOL_INPUTS%MieTmat%PSDpars(2,2)     ! Tmat PSD Second parameter values
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%PSDpars(3,1), GEMSTOOL_INPUTS%MieTmat%PSDpars(3,2)     ! Tmat PSD Third  parameter values
+
+!  PSD Integration control
+
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%Tmat_nkmax(1),GEMSTOOL_INPUTS%MieTmat%Tmat_nkmax(2)    ! Tmat Gaussian PSD integration numbers
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%FixR1R2(1),    GEMSTOOL_INPUTS%MieTmat%FixR1R2(2)      ! Tmat Use particle radius cutoff to fix Rmin/Rmax
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%R1R2_cutoff(1),GEMSTOOL_INPUTS%MieTmat%R1R2_cutoff(2)  ! Tmat Particle radius cutoff 
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%R1(1), GEMSTOOL_INPUTS%MieTmat%R1(2)                   ! Tmat Minimum particle radii (Microns)
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%R2(1), GEMSTOOL_INPUTS%MieTmat%R2(2)                   ! Tmat/Maximum particle radii (Microns)
+
+!  refractive indices, shape factor
+
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%nreal(1), GEMSTOOL_INPUTS%MieTmat%nreal(2)             ! Tmat Real parts of refractive index
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%nimag(1), GEMSTOOL_INPUTS%MieTmat%nimag(2)             ! Tmat Imaginary part of refractive index
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%Tmat_eps(1),GEMSTOOL_INPUTS%MieTmat%Tmat_eps(2)        ! Tmat shape factors
+
+! End T-matrix aerosols
+
+      close(1)

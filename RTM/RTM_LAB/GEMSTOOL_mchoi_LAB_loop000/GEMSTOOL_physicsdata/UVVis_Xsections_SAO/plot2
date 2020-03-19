@@ -1,0 +1,12 @@
+set multiplot
+
+set xrange[405:1100] ; unset xlabel ; unset ylabel
+
+y1 = 0 ; y2 = 0.6 ; y3 = abs(y2-y1)/6.0
+set yrange[y1:y2] ; set ytics y3
+set size 0.9,0.9 ;set origin 0.05,0.05
+plot 'ChappuisWulf_Modtran_data.CTM' using 1:2 notitle w l lt 3 lw 2,\
+     'o3abs_brion_195_660_vacfinal.dat' using 1:2 notitle w l lt 1 lw 2
+
+unset multiplot
+

@@ -1,0 +1,25 @@
+T                                ! do bimodal
+0.7                              ! bimodal fraction
+TestProps_mode01_Tmat_prop.dat   ! User Aero file name #1
+TestProps_mode02_Tmat_prop.dat   ! User Aero file name #2
+
+
+
+TestProps_mode01_Mie_prop.dat    ! User Aero file name #1
+TestProps_mode02_Mie_prop.dat    ! User Aero file name #2
+
+t
+0.999795
+TestProps_mode01_Mie_prop.dat
+TestProps_mode02_Mie_prop.dat
+
+
+      OPEN(1,file=trim(filnam),err=90,status='old')
+      read(1,*)GEMSTOOL_INPUTS%MieTmatUser%do_bimodal                          ! Flag for Bimodal aerosol
+      read(1,*)GEMSTOOL_INPUTS%MieTmatUser%bimodal_fraction                    ! Bimodal fraction
+      read(1,*)GEMSTOOL_INPUTS%MieTmatUser%User_Aerofile_names(1)
+      read(1,*)GEMSTOOL_INPUTS%MieTmatUser%User_Aerofile_names(2)
+      close(1)
+
+NOTES - Must make bimodal information the same as Tmat if Prepared Aerosols are Tmat---
+NOTES - Must make bimodal information the same as Mie  if Prepared Aerosols are Mie---

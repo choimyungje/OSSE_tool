@@ -1,0 +1,233 @@
+program Create_TriAx_Driver
+
+!  R. Spurr, 12-17 January 2017. PRELIMINARY.
+
+!  PROVIDES a file ot User-defined TriAx Aerosols for use in GEMSTOOL
+
+!  4 Stages to this operation:
+!    (1) First take an "nc" file from the TriAx data set and convert to ascii using,
+!          ncdump Database_yx1.00_zx1.00_mr1.10_mi0.0010.nc > TEMPODATA
+!    (2) Extract data from the ascii file TEMPODATA created using "ncdump"
+!    (3) Develop F-matrix moments for use in Gemstool
+!    (4) Write up develop aerosol data into a file for use in GEMSTOOL
+
+!  This Driver covers Stages 2-4. Stage 1 is easy and is done with a command line instruction.
+
+!  Notes
+!  =====
+
+!  (a) At the moment, selection is restricted to just one wavelength, and just one size bin.
+!      This is all controlled by the configuration file "Test_TriAx.cfg:
+!   open(1, file = 'Test_TriAx.cfg', status = 'old')
+!   read(1,*)N_Coeffs      ! Number of coefficients in F-matrix expansions
+!   read(1,*)Wavelength    ! Microns
+!   read(1,*)RefWvl        ! Logical - is set, only outputs extinction
+!   read(1,*)SingleSize    ! Logical - currently only option is TRUE
+!   read(1,*)SingleRadius  ! Microns
+!   close(1)
+
+!  (b) 2 Choices of particle size and wavelength -->  single choice of paricle size parameter
+!      to use from the data set, since x = 2.pi.radius/lambda.
+!      HOW DO WE USE ALL THE PARTICLE SIZES (not determined yet).
+
+!  (c) If you choose reference wavelength = TRUE, then the only thing output is the extinction coefficient
+!      at this wavelengh. This is necessary for GEMSTOOL because we rely on a reference wavelength for
+!     (usuall 500 nm = 0.55 Microns) for the aerosol calculations.
+
+!  (d) Ncoeffs should be at least 50. I have experimented with a few values, and checked on the
+!      accuracy of the expansions: the F-matrices are accurately reporduced in the forward scattering
+!      directions, but it is difficult to get full accuracy for the two backscatter peaks.
+
+!  User Modules
+!  ============
+
+   use Extract_TriAxData_m           ! Module for stage 2
+   use Create_TriAx_for_GEMSTOOL_m   ! Module for stage 3
+   use Write_TriAxaerosol_file_m     ! Module for stage 4
+
+   implicit none
+
+!  Precision
+
+   integer, parameter :: fpk = SELECTED_REAL_KIND(15)
+
+!  data file
+
+   character*100 :: DataFile
+
+!  TriAx data, extracted and input here
+!  ====================================
+
+!  Detailed arrays for use in a Type structure
+
+   real(fpk)  :: TriAxData_Scatangles(500)     ! Degrees
+   real(fpk)  :: TriAxData_Sizepars  (100)     
+
+   real(fpk)  :: TriAxData_MuellerMat(100,6,500)
+   real(fpk)  :: TriAxData_XsecsAsym(100,4)
+   real(fpk)  :: TriAxData_Efficiency(100,4)
+   real(fpk)  :: TriAxData_Distpars(100,4)
+
+!  Mueller matrix quantities, indices 1-6 (middle dimension)
+
+!  1:ln(P11)
+!  2:P22/P11
+!  3:P33/P11
+!  4:P44/P11
+!  5:P12/P11
+!  6:P34/P11
+
+!Triax_Efficiency(k,1) = extinction efficiency
+!Triax_Efficiency(k,2) = absorption efficiency
+!Triax_Efficiency(k,3) = scattering efficiency
+!Triax_Efficiency(k,4) = single-scattering albedo
+
+!Triax_XsecsAsym(k,1)  = extinction cross section
+!Triax_XsecsAsym(k,2)  = absorption cross section
+!Triax_XsecsAsym(k,3)  = absorption cross section
+!Triax_XsecsAsym(k,4)  = asymmetry factor of phase function
+	
+!Triax_Distpars(k,1) = rproj  = the radius of the surface-equivalent spheres
+!Triax_Distpars(k,2) = reff   = the radius of the volume-equivalent spheres
+!Triax_Distpars(k,3) = parea  = the projected area
+!Triax_Distpars(k,4) = volume = the volume of the particle
+
+!  Output is the TriAx stuff as needed for GEMSTOOL
+!  ================================================
+
+!  set max_Coeffs
+
+   integer, parameter :: Max_Coeffs = 5000
+
+!  Distribution parameters
+!  Bulk optical parameters
+!    1 = Extinction coefficient
+!    2 = Scattering coefficient
+!    3 = Single scattering albedo
+!  Asymmetry parameter and number of expansion coefficients
+!  Number and value of expansion coefficients
+
+   real(fpk)  :: TriAx_dist(5)
+   real(fpk)  :: TriAx_bulk(3)
+   real(fpk)  :: TriAx_asymm
+   integer    :: TriAx_ncoeffs
+   real(fpk)  :: TriAx_expcoeffs(6,0:max_coeffs)
+
+!  Exception handling
+
+   logical       :: fail
+   character*120 :: message
+
+!  Local
+!  =====
+
+!  Control
+!  -------
+
+!  Number of coefficients
+
+   integer :: N_Coeffs
+
+!  Wavelength (Micron)
+
+   real(fpk) :: Wavelength
+   logical   :: RefWvl
+
+!  Single size flag and Radius
+!   if set, then use just one size-parameter bin
+!   Current default, using 1 single size.
+
+   logical   :: SingleSize
+   real(fpk) :: SingleRadius
+
+!  Help
+!  ----
+
+   integer :: w, k
+   character*256 :: OutFileName
+   integer       :: OutFileUnit
+   logical, parameter :: do_Debug_Write = .true.
+
+!  0. set up configuration
+!  =======================
+
+!  See notes (a)
+
+   open(1, file = 'Test_TriAx.cfg', status = 'old')
+   read(1,*)N_Coeffs      ! Number of coefficients in F-matrix expansions
+   read(1,*)Wavelength    ! Microns
+   read(1,*)RefWvl        ! Logical - is set, only outputs extinction
+   read(1,*)SingleSize    ! Logical - currently only option is TRUE
+   read(1,*)SingleRadius  ! Microns
+   close(1)
+
+!  index
+
+   w = 1
+
+!  files
+
+   OutFileUnit = 45
+   OutFileName = 'FIRST_TriAx_Output.dat'
+   DataFile    = 'TEMPODATA'
+
+   write(*,*)' ** You will be extracting TriAx data from a file called   : '//Trim(DataFile)
+   write(*,*)' ** You will be writing TriAx User-defined aerosols to file: '//Trim(OutFileName)
+
+!  Stage 2. Extract Data
+!  =====================
+
+   Call Extract_TriAxData ( Datafile, &
+      TriAxData_Scatangles, TriAxData_Sizepars,   TriAxData_MuellerMat, & ! Output data
+      TriAxData_XsecsAsym,  TriAxData_Efficiency, TriAxData_Distpars,   & ! output data
+      Fail, message )
+
+!  Failed
+
+   if ( Fail ) then
+      write(*,*)'Data Extraction failed. Here is the message - '
+      write(*,*)Trim(message)
+      stop'stop after failed data extraction !!!!!!!!'
+   endif
+
+!  debug
+
+   if ( do_Debug_Write ) then
+     open(66,file='DebugWrite/QextQscaQabsSalb.DEBUG',status='unknown')
+     open(67,file='DebugWrite/CextCscaCabsAsym.DEBUG',status='unknown')
+     open(68,file='DebugWrite/Phasfunc_X62.DEBUG',status='unknown')
+     do k = 1, 100
+       write(66,*)k, TriAxData_Sizepars(k),TriAxData_Efficiency(k,1:4)
+       write(67,*)k, TriAxData_Sizepars(k),TriAxData_XsecsAsym(k,1:4)
+     enddo
+     do k = 1, 500
+       write(68,*)k, TriAxData_Scatangles(k),exp(TriAxData_MuellerMat(62,1,k)),TriAxData_MuellerMat(62,1,k)
+     enddo
+     close(66); close(67) ;  close(68)
+   endif
+
+   write(*,*)'Done Stage 2: Tri-Axial Data extraction from file'
+
+!  Stage 3. develop data for GEMSTOOL
+!  ==================================
+
+   Call Create_TriAx_for_GEMSTOOL &
+    ( Max_Coeffs, N_Coeffs, Wavelength, SingleSize, SingleRadius,       & ! Control
+      TriAxData_Scatangles, TriAxData_Sizepars,   TriAxData_MuellerMat, & ! Input data
+      TriAxData_XsecsAsym,  TriAxData_Efficiency, TriAxData_Distpars,   & ! Input data
+      TriAx_dist, TriAx_bulk, TriAx_asymm, TriAx_ncoeffs, TriAx_expcoeffs ) ! output for GEMSTOOL
+
+   write(*,*)'Done Stage 3: GEMSTOOL preparation of aerosols'
+
+!  Stage 4. Write to GEMSTOOL User aerosol file
+!  ============================================
+
+   Call Write_TriAxaerosol_file ( &
+       Max_Coeffs, OutFileName, OutFileUnit, w, Wavelength, RefWvl, &
+       TriAx_dist, TriAx_bulk, TriAx_asymm, TriAx_ncoeffs, TriAx_expcoeffs )
+
+   write(*,*)'Done Stage 4: GEMSTOOL Write-up to User-Aerosols file'
+
+
+stop
+end program Create_TriAx_Driver

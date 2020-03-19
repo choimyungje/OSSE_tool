@@ -1,0 +1,5 @@
+BRDF_K_iso_avg_std     0.223739    0.0151603
+BRDF_K_vol_avg_std    0.0888454    0.0348221
+BRDF_K_geo_avg_std    0.0412440   0.00765428
+BPDF_K_pol_avg_std      5.88671      1.48928
+NDVI_avg_std     0.285785    0.0649141

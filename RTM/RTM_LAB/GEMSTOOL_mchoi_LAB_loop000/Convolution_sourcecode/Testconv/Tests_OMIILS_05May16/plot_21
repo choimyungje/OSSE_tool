@@ -1,0 +1,16 @@
+set multiplot
+
+x1 = 306.5 ; x2 = 312.5
+set xrange[x1:x2] ; unset xlabel ; unset ylabel
+#set ylabel 'Intensity'
+#set xlabel 'Wavelength [nm]'
+
+c1 = 1 ; c2 = c1 + 1
+y1 = 0.0 ; y2 = 1.0 ; y3 = abs(y2-y1)/4
+set yrange[y1:y2] ; set ytics y3
+set size 0.9,0.9 ;set origin 0.0,0.0
+plot 'fort.31' using 2:154 notitle w l lt -1 lw 1,\
+     'fort.31' using 2+c1:154+c1 notitle w l lt 1 lw 2,\
+     'fort.31' using 2+c2:154+c2 notitle w l lt 2 lw 2
+unset multiplot
+

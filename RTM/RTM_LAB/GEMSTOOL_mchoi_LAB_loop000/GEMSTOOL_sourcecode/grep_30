@@ -1,0 +1,87 @@
+GEMSTOOL_Linearized_RTCALC.f90:15:!  Rob Fix, 11/30/16. Allowing for linear parameterization of SIF.
+GEMSTOOL_Linearized_RTCALC.f90:71:!    11/30/16. Add SIF Polynomial factor and derivatives
+GEMSTOOL_Linearized_RTCALC.f90:72:!    11/30/16. Add SIF Exact-only approximation option
+GEMSTOOL_Linearized_RTCALC.f90:173:!  11/30/16. Upgrade to include linear parameterization of Fluorescence
+GEMSTOOL_Linearized_RTCALC.f90:228:!  11/30/16. Upgrade to include linear parameterization of Fluorescence
+GEMSTOOL_NSW_Fluorescence.f90:4:!       updated 11/30/16. Optional use of linear parameterization
+GEMSTOOL_NSW_Fluorescence.f90:139:!    11/30/16. Add control for Exact-only approximation, linear parameterization
+GEMSTOOL_NSW_Fluorescence.f90:179:!   11/30/16. Add variables for Linear and gaussian parameterizations
+GEMSTOOL_NSW_pthg_profiles.f90:202:   con1 = 0.0053024
+GEMSTOOL_NSW_pthg_profiles.f90:204:   con3 = 0.000003086
+GEMSTOOL_NSW_SetJacobians.f90:13:!  Rob Fix, 11/30/16
+GEMSTOOL_NSW_SetJacobians.f90:83:   logical, intent(in) :: do_SIF_Jacobians ! New 10/18/16, renamed 11/30/16
+GEMSTOOL_NSW_SetJacobians.f90:92:!  Number of SIF parameters. 11/30/16
+GEMSTOOL_NSW_SetJacobians.f90:98:!      SIF parameters added to this list, 10/18/16, 11/30/16 (renamed)
+GEMSTOOL_NSW_SetJacobians.f90:165:!       11/30/16, Renamed, added 2 parameters for linear parameterization.
+GEMSTOOL_NSW_SetJacobians.f90:228:   RADIANCE_SIFPARAMWFS(:,W,:) = ZERO      ! New, 11/30/16
+GEMSTOOL_NSW_SetJacobians.f90:461:!             11/30/16, Add second derivative for linear parameterization
+GEMSTOOL_NSW_SetJacobians_IQU.f90:13:!  Rob Fix, 11/30/16
+GEMSTOOL_NSW_SetJacobians_IQU.f90:92:   logical, intent(in) :: do_SIF_Jacobians ! New 10/18/16, renamed 11/30/16
+GEMSTOOL_NSW_SetJacobians_IQU.f90:101:!  Number of SIF parameters. 11/30/16
+GEMSTOOL_NSW_SetJacobians_IQU.f90:107:!      SIF parameters added to this list, 10/18/16, 11/30/16 (renamed)
+GEMSTOOL_NSW_SetJacobians_IQU.f90:174:!       11/30/16, Renamed, added 2 parameters for linear parameterization.
+GEMSTOOL_NSW_SetJacobians_IQU.f90:227:!       11/30/16, Renamed, added 2 parameters for linear parameterization.
+GEMSTOOL_NSW_SetJacobians_IQU.f90:287:   RADIANCE_SIFPARAMWFS(:,W,:) = ZERO      ! New, 11/30/16
+GEMSTOOL_NSW_SetJacobians_IQU.f90:647:!             11/30/16, Add second derivative for linear parameterization
+GEMSTOOL_numerical.f90:257:  if (yp1.gt..99e30) then
+GEMSTOOL_numerical.f90:275:  if (ypn.gt..99d30) then
+GEMSTOOL_numerical.f90:456:      IF ((X1(N1)-X1(1))*(X2(N2)-X2(1))) 300,300,500
+GEMSTOOL_numerical.f90:462:  300 CONTINUE
+GEMSTOOL_numerical.f90:465:      DO 301 J=1,N2P
+GEMSTOOL_numerical.f90:469:  301 CONTINUE
+GEMSTOOL_numerical.f90:503:      DO 302 J=1,N2P
+GEMSTOOL_numerical.f90:510:  302 CONTINUE
+GEMSTOOL_Rayleigh.f90:57:      real(fpk)    :: N300M1,NCO2M1,NCO2
+GEMSTOOL_Rayleigh.f90:115:      N300M1 = S1_A + ( S1_B / ( S1_C - LPM2 ) ) + &
+GEMSTOOL_Rayleigh.f90:117:      N300M1 = N300M1 * 1.0D-08
+GEMSTOOL_Rayleigh.f90:121:      NCO2M1 = N300M1 * ( 1.0D0 + S2_A * ( MCO2  - 0.0003D0 ) )
+GEMSTOOL_Read_Configfiles.f90:591:!  SIF Added, 10/18/16, updated 11/30/16 for linear parameterization. Rob Spurr
+GEMSTOOL_Read_Configfiles.f90:618:!                - (11/30/16). Extra control for linear parameterization, Exact-Only solution
+GEMSTOOL_Read_Configfiles.f90:665:!  @@ Rob   fix 10/18/16, add SIF Jacobian flag, updated 11/30/16
+GEMSTOOL_Read_Configfiles.f90:825:! @ Rob added 11/30/16. Linear parameterization control, Exact-only control
+GEMSTOOL_Read_Configfiles.f90:1088:      !   0.30186852870E-01   0.29730300500E-01   0.98487578775E+00   0.59090185717E+00           0
+GEMSTOOL_Read_Configfiles.f90:1124:      !   0.30186852870E-01   0.29730300500E-01   0.98487578775E+00
+GEMSTOOL_Read_Configfiles.f90:1137:      !   0.30186852870E-01   0.29730300500E-01   0.98487578775E+00   0.98487578775E+00   0.98487578775E+00
+GEMSTOOL_Read_Configfiles.f90:1591:      !   0.30186852870E-01   0.29730300500E-01   0.98487578775E+00   0.59090185717E+00           0
+GEMSTOOL_Read_Configfiles.f90:1603:         !  1     0.30186852870E-01   0.29730300500E-01   0.98487578775E+00    0.59090185717E+00
+GEMSTOOL_Read_Configfiles.f90:1604:         !  2     0.30186852870E-01   0.29730300500E-01   0.98487578775E+00    0.59090185717E+00 ...etc.
+GEMSTOOL_Read_Configfiles.f90:1613:         !  1     0.30186852870E-01   0.29730300500E-01   0.98487578775E+00    0.59090185717E+00
+GEMSTOOL_Read_Configfiles.f90:1614:         !  2     0.30186852870E-01   0.29730300500E-01   0.98487578775E+00    0.59090185717E+00 ...etc.
+GEMSTOOL_Read_Configfiles.f90:1677:      !   0.30186852870E-01   0.29730300500E-01   0.98487578775E+00
+GEMSTOOL_Read_Configfiles.f90:1687:         !  1     0.30186852870E-01   0.29730300500E-01   0.98487578775E+00
+GEMSTOOL_Read_Configfiles.f90:1688:         !  2     0.30186852870E-01   0.29730300500E-01   0.98487578775E+00 ...etc.
+GEMSTOOL_Read_Configfiles.f90:1698:         !  1     0.30186852870E-01   0.29730300500E-01   0.98487578775E+00
+GEMSTOOL_Read_Configfiles.f90:1699:         !  2     0.30186852870E-01   0.29730300500E-01   0.98487578775E+00 ...etc.
+GEMSTOOL_Read_Configfiles.f90:1712:      !        0.30186852870E-01   0.29730300500E-01   0.98487578775E+00   0.98487578775E+00   0.98487578775E+00
+GEMSTOOL_Read_Configfiles.f90:1713:      !  1     0.30186852870E-01   0.29730300500E-01   0.98487578775E+00   0.98487578775E+00   0.98487578775E+00
+GEMSTOOL_Read_Configfiles.f90:1714:      !  2     0.30186852870E-01   0.29730300500E-01   0.98487578775E+00   0.98487578775E+00   0.98487578775E+00....etc
+GEMSTOOL_Regular_RTCALC.f90:13:!  Rob Fix, 11/30/16. Allowing for linear parameterization of SIF.
+GEMSTOOL_Regular_RTCALC.f90:58:!  11/30/16. Add SIF Polynomial factor (Equal to 1.0 unless SIF linear parameterization)
+GEMSTOOL_Regular_RTCALC.f90:59:!  11/30/16. Add SIF Exact-only approximation option
+GEMSTOOL_Regular_RTCALC.f90:125:!  11/30/16. Upgrade to include linear parameterization of Fluorescence
+GEMSTOOL_Type_Structures.f90:475:!    -- ( 11/30/16) Only to be used with the Gaussian parameterization
+GEMSTOOL_Type_Structures.f90:479:!  Linear parameterization introduced 11/30/16
+GEMSTOOL_Type_Structures.f90:521:!             11/30/16. Renamed, now with linear parameterization in SIF
+GEMSTOOL_UVN_cross_sections.f90:251:!  ... h2co_cc.300 (Chris Cantrell, SAO)
+GEMSTOOL_UVN_cross_sections.f90:253:         FILENAME = adjustl(trim(SAO_XSEC_PATH))//'h2co_cc.300'
+GEMSTOOL_UVN_cross_sections.f90:392:      real(fpk)    :: N300M1,NCO2M1,NCO2
+GEMSTOOL_UVN_cross_sections.f90:450:      N300M1 = S1_A + ( S1_B / ( S1_C - LPM2 ) ) + &
+GEMSTOOL_UVN_cross_sections.f90:452:      N300M1 = N300M1 * 1.0D-08
+GEMSTOOL_UVN_cross_sections.f90:456:      NCO2M1 = N300M1 * ( 1.0D0 + S2_A * ( MCO2  - 0.0003D0 ) )
+GEMSTOOL_UVN_cross_sections.f90:533:   integer, parameter :: maxspline = 50000  ! This covers the range 300-600 nm
+GEMSTOOL_UVN_cross_sections.f90:860:   integer, parameter :: maxspline = 50000 ! This covers the GEMS range 300-600 nm
+GEMSTOOL_UVN_cross_sections.f90:996:   integer, parameter :: maxspline = 30000 ! This covers the GEMS range 300-600 nm
+GEMSTOOL_UVN_cross_sections.f90:1135:   integer, parameter :: maxspline = 50000 ! This covers the GEMS range 300-600 nm
+GEMSTOOL_UVN_cross_sections.f90:1411:   integer, parameter :: maxspline = 20000 ! This covers the GEMS range 300-600 nm
+GEMSTOOL_UVN_cross_sections_PLUS.f90:264:!  ... h2co_cc.300 (Chris Cantrell, SAO)
+GEMSTOOL_UVN_cross_sections_PLUS.f90:266:         FILENAME = adjustl(trim(SAO_XSEC_PATH))//'h2co_cc.300'
+GEMSTOOL_UVN_cross_sections_PLUS.f90:439:      real(fpk)    :: N300M1,NCO2M1,NCO2
+GEMSTOOL_UVN_cross_sections_PLUS.f90:497:      N300M1 = S1_A + ( S1_B / ( S1_C - LPM2 ) ) + &
+GEMSTOOL_UVN_cross_sections_PLUS.f90:499:      N300M1 = N300M1 * 1.0D-08
+GEMSTOOL_UVN_cross_sections_PLUS.f90:503:      NCO2M1 = N300M1 * ( 1.0D0 + S2_A * ( MCO2  - 0.0003D0 ) )
+GEMSTOOL_UVN_cross_sections_PLUS.f90:580:   integer, parameter :: maxspline = 30100  ! This covers the range 300-600 nm
+GEMSTOOL_UVN_cross_sections_PLUS.f90:907:   integer, parameter :: maxspline = 17360 ! This covers the GEMS range 300-600 nm
+GEMSTOOL_UVN_cross_sections_PLUS.f90:1044:   integer, parameter :: maxspline = 15020 ! This covers the GEMS range 300-600 nm
+GEMSTOOL_UVN_cross_sections_PLUS.f90:1183:   integer, parameter :: maxspline = 18700 ! This covers the GEMS range 300-600 nm
+GEMSTOOL_UVN_cross_sections_PLUS.f90:1459:   integer, parameter :: maxspline = 10485 ! This covers the GEMS range 300-600 nm
+GEMSTOOL_UVN_SolarSpec.f90:62:   real(kind=fpk), parameter :: small = 1.0d-30

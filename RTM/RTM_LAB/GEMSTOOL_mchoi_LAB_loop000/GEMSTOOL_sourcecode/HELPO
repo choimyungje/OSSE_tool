@@ -1,0 +1,35 @@
+GEMSTOOL_AerProperties.f90:   integer, parameter :: nPLines = 6
+GEMSTOOL_AerProperties.f90:   character(len=80)  :: AeroFilePreamble(nPLines)
+GEMSTOOL_AerProperties.f90:                maxAerModes, nm, nPLines, DoAeroFilePreamble,                                           & ! I/O
+GEMSTOOL_AerProperties.f90:                   maxAerModes, nm, nPLines, DoAeroFilePreamble, AeroFilePreamble,                       & ! I/O
+GEMSTOOL_AerProperties.f90:                maxAerModes, nm, nPLines, DoAeroFilePreamble,                                           & ! I/O
+GEMSTOOL_AerProperties.f90:                   maxAerModes, nm, nPLines, DoAeroFilePreamble, AeroFilePreamble,                       & ! I/O
+GEMSTOOL_AerProperties_PLUS.f90:   integer, parameter :: nPLines = 6
+GEMSTOOL_AerProperties_PLUS.f90:             1, 1, nPLines, DoAeroFilePreamble,                              & !I/O
+GEMSTOOL_AerProperties_PLUS.f90:   integer, parameter :: nPLines = 6
+GEMSTOOL_AerProperties_PLUS.f90:   character(len=80)  :: AeroFilePreamble(nPLines)
+GEMSTOOL_AerProperties_PLUS.f90:                  maxAerModes, nm, nPLines, DoAeroFilePreamble,                                                      & ! I/O
+GEMSTOOL_AerProperties_PLUS.f90:                maxAerModes, nm, nPLines, DoAeroFilePreamble,                                           & ! I/O
+GEMSTOOL_AerProperties_PLUS.f90:                   maxAerModes, nm, nPLines, DoAeroFilePreamble, AeroFilePreamble,                                  & ! I/O
+GEMSTOOL_AerProperties_PLUS.f90:                   maxAerModes, nm, nPLines, DoAeroFilePreamble, AeroFilePreamble,                       & ! I/O
+GEMSTOOL_AerProperties_PLUS.f90:                  maxAerModes, nm, nPLines, DoAeroFilePreamble,                                                      & ! I/O
+GEMSTOOL_AerProperties_PLUS.f90:                maxAerModes, nm, nPLines, DoAeroFilePreamble,                                           & ! I/O
+GEMSTOOL_AerProperties_PLUS.f90:                   maxAerModes, nm, nPLines, DoAeroFilePreamble, AeroFilePreamble,                                  & ! I/O
+GEMSTOOL_AerProperties_PLUS.f90:                   maxAerModes, nm, nPLines, DoAeroFilePreamble, AeroFilePreamble,                       & ! I/O
+GEMSTOOL_Read_Configfiles.f90:   maxAerModes, nAerMode, nPLines, DoPreamble,                & ! I/O
+GEMSTOOL_Read_Configfiles.f90:   integer, intent(in)           :: maxAerModes, nAerMode, nPLines
+GEMSTOOL_Read_Configfiles.f90:      do i=1,nPLines
+GEMSTOOL_Read_Configfiles.f90:   maxAerModes, nAerMode, nPLines, DoPreamble, Preamble,        & ! I/O
+GEMSTOOL_Read_Configfiles.f90:   integer, intent(in)           :: maxAerModes, nAerMode, nPLines
+GEMSTOOL_Read_Configfiles.f90:   character(len=*), intent(in)  :: Preamble(nPLines)
+GEMSTOOL_Read_Configfiles.f90:      do i=1,nPLines
+GEMSTOOL_Read_Configfiles.f90:   maxAerModes, nAerMode, nPLines, DoPreamble,                       & ! I/O
+GEMSTOOL_Read_Configfiles.f90:   integer, intent(in)           :: maxAerModes, nAerMode, nPLines
+GEMSTOOL_Read_Configfiles.f90:      do i=1,nPLines
+GEMSTOOL_Read_Configfiles.f90:    maxAerModes, nAerMode, nPLines, DoPreamble,       & ! I/O
+GEMSTOOL_Read_Configfiles.f90:   integer, intent(in)    :: maxAerModes, nAerMode, nPLines
+GEMSTOOL_Read_Configfiles.f90:      do i=1,nPLines
+GEMSTOOL_Read_Configfiles.f90:   maxAerModes, nAerMode, nPLines, DoPreamble, Preamble,             & ! I/O
+GEMSTOOL_Read_Configfiles.f90:   integer, intent(in)           :: maxAerModes, nAerMode, nPLines
+GEMSTOOL_Read_Configfiles.f90:   character(len=*), intent(in)  :: Preamble(nPLines)
+GEMSTOOL_Read_Configfiles.f90:      do i=1,nPLines

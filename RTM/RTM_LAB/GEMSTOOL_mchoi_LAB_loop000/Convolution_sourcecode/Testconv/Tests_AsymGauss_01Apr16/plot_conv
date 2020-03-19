@@ -1,0 +1,24 @@
+set multiplot
+
+set xrange[305:335] ; unset xlabel ; unset ylabel
+#set ylabel 'Intensity'
+#set xlabel 'Wavelength [nm]'
+
+y1 = 0.0 ; y2 = 0.08 ; y3 = abs(y2-y1)/4
+set yrange[y1:y2] ; set ytics y3
+set size 0.9,0.33 ;set origin 0.0,0.67
+plot 'ExactScalar_D04_Ray_RS_Obsg_S30V00A010_MW2_CF022_Tr106.Out' using 2:4 notitle w l lt -1 lw 1,\
+     'ExactScalar_D04_Ray_RS_Obsg_S30V00A010_MW2_CF022_Tr106.COA' using 1:2 notitle w l lt 1 lw 2
+y1 = 0.0 ; y2 = 0.25 ; y3 = abs(y2-y1)/5
+set yrange[y1:y2] ; set ytics y3
+set size 0.9,0.33 ;set origin 0.0,0.33
+plot 'ExactScalar_D04_Ray_RS_Obsg_S30V00A010_MW2_CF022_Tr106.Out' using 2:5 notitle w l lt -1 lw 1,\
+     'ExactScalar_D04_Ray_RS_Obsg_S30V00A010_MW2_CF022_Tr106.COA' using 1:3 notitle w l lt 1 lw 2
+y1 = 0.0 ; y2 = 0.12 ; y3 = abs(y2-y1)/4
+set yrange[y1:y2] ; set ytics y3
+set size 0.9,0.33 ;set origin 0.0,0.0
+plot 'ExactScalar_D04_Ray_RS_Obsg_S30V00A010_MW2_CF022_Tr106.Out' using 2:6 notitle w l lt -1 lw 1,\
+     'ExactScalar_D04_Ray_RS_Obsg_S30V00A010_MW2_CF022_Tr106.COA' using 1:4 notitle w l lt 1 lw 2
+
+unset multiplot
+

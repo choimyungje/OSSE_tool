@@ -1,0 +1,41 @@
+Hi Rob -
+
+I've checked the new aerosol development by running the UVN tests based on
+  the tests:
+  GEMSTOOL_UVN_Linearized_Master.f90
+  GEMSTOOL_UVN_Radiances_Master.f90
+  GEMSTOOL_UVN_Radiances_Master_FD12.f90
+under both gfortran and NAG.
+
+I found a few bugs.  In particular, you'll want to look for
+  "mick fix"s in the above drivers.  You may wish to remove
+  the "mick fix" comments for cleanliness.
+
+I put your recent results under:
+  GEMSTOOL_UVN_Results_Rob/
+  fort_test_files_Rob/
+
+Similarly, mine are under:
+  GEMSTOOL_UVN_Results_mick_gfortran/
+  GEMSTOOL_UVN_Results_mick_nag/
+  fort_test_files_mick_gfortran/
+  fort_test_files_mick_nag/
+
+I generated the diff files for the files in:
+  GEMSTOOL_UVN_Results_mick_gfortran/
+  GEMSTOOL_UVN_Results_mick_nag/
+using "gems_check.bash"
+
+I generated the diff files for the files in:
+  fort_test_files_mick_gfortran/
+  fort_test_files_mick_nag/
+using "gems_check_lin_aero.bash"
+
+I don't know if you'll want to keep these subdirectories
+  in there when you send the package to the Koreans;
+  I just left them in there solely for your reference
+
+
+
+
+

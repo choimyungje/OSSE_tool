@@ -1,0 +1,67 @@
+Timings in seconds on RT Solutions' Dell XPS Notebook
+
+  - Figures in brackets are scalings
+  - Timing figures are average of 3 runs with no makefile creation
+  - EL = elastic-only calculation with 1 core (eqv. LIDORT in serial mode)
+  - in general, "Fourier elastic" takes ~10% of time, "Fourier Raman" ~90%
+
+     NCORES         CR             EB            EL
+
+       1        15.70 (1.00)   16.17 (1.00)      1.60
+       2         7.92 (1.98)    8.11 (1.99)
+       4         4.35 (3.61)    4.45 (3.63)
+
+Files have the number of codes added to the file-name extensions
+
+
+
+OpenMP tests
+============
+
+Timings in seconds on RT Solutions' assistant's Dell desktop.
+All tests below ran in energy balance (EB) mode.
+
+
+O3bin test
+----------
+
+Using serial source code:
+
+           Timing report
+ Numwvn # Threads Time (sec)
+ ------ --------- ----------
+    52      1        0.96
+
+Using internally re-engineered source code using OpenMP:
+
+               Timing report
+ Numwvn # OMP Threads Time (sec)
+ ------ ------------- ----------
+    52        1         0.97
+    52        2         0.50
+    52        4         0.29
+
+
+LPbin test
+----------
+
+Using serial source code:
+
+           Timing report
+ Numwvn # Threads Time (sec)
+ ------ --------- ----------
+    52      1       69.64
+
+Using internally re-engineered source code using OpenMP:
+
+               Timing report
+ Numwvn # OMP Threads Time (sec)
+ ------ ------------- ----------
+    52        1        69.39
+    52        2        35.18
+    52        4        19.78
+
+
+*******************************************************************************
+*******************************************************************************
+

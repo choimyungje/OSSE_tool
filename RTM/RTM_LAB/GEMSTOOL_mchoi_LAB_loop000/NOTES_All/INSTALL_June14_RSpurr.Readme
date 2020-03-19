@@ -1,0 +1,40 @@
+
+Extension to Aerosol Bulk Property Jacobians in GEMS Code
+=========================================================
+
+INSTALLATION
+
+In the UVN_Wrapper directory, execute "makefile', --> 3 executables
+
+Gemstool_UVN_Regular.exe      	      Produces Stokes_I For 1  baseline 
+Gemstool_UVN_Regular_FD12.exe         Produces Stokes_I For 12 FD perturbations
+			                ** 12 files: fort.401 --> fort.412
+Gemstool_UVN_Linearized.exe	      Produces Stokes_I + 12 Jacobians baseline
+			                ** 1 file: fort.443
+
+
+execute "build_compar.sh"
+  --> This compares 12 analytical and FD Jacobians for 12 properties
+  --> generates fort.500 and fort.501 (which are the same)
+
+For The 12 Aerosol Jacobians, we have the following.
+!   ( Look in ../GEMSTOOL_sourcecode/GEMSTOOL_AerProperties_PLUS.f90 for details )
+
+!  ORDER OF APPEARANCE for A BIMODAL MIE Aerosol with both PSDs having 2 parameters, with GDF LOADING
+!  --------------------------------------------------------------------------------------------------
+
+!   WF #   GROUP  PSD MODE #   Jacobian parameter
+
+!     1      2       1         Real part of the refractive index for Mode-1
+!     2      2       1         Imag part of the refractive index for Mode-1
+!     3      4       1         Parameter 1 of Particle Size Distribution for Mode-1 e.g. Log-Normal Mode Radius
+!     4      4       1         Parameter 2 of Particle Size Distribution for Mode-1 e.g. Log-Normal Standard Deviation
+!     5      2       2         Real part of the refractive index for Mode-2
+!     6      2       2         Imag part of the refractive index for Mode-2
+!     7      4       2         Parameter 1 of Particle Size Distribution for Mode-2 e.g. Log-Normal Mode Radius
+!     8      4       2         Parameter 2 of Particle Size Distribution for Mode-2 e.g. Log-Normal Standard Deviation
+!     9      5       -         Bimodal fraction for PSDs
+!     10     1       -         Total optical depth of aerosol (aerau_input_w0) at reference wavelength w0
+!     11     1       -         Peak Height parameter in GDF loading
+!     12     1       -         Half Width  parameter in GDF Loading
+

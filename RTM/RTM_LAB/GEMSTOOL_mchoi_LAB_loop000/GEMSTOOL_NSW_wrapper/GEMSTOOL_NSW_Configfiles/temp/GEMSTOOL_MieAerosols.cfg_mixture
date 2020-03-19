@@ -1,0 +1,46 @@
+T                                        ! Bimodal
+0.99929                                  ! Volume fraction
+4,4                                      ! Particle Size Distribution indices
+0.0804, 0.9212                           ! First  PSD parameter values
+1.4305, 1.8847                           ! Second PSD parameter values
+0.0,0.0                                  ! Third  PSD parameter values
+10,10                                    ! Number of blocks covering the PSDs
+20,20                                    ! Number of Quadrature weights in each block
+5000.0                                   ! Particle size limit
+F,F                                      ! Use particle radius cutoff to fix Rmin/Rmax
+1.0E-6,1.0E-6                            ! Particle radius cutoff
+0.0207, 0.0207                           ! Minimum particle radii (Microns)
+10.75, 10.75                             ! Maximum particle radii (Microns)
+1.49644, 1.49644                         ! Real parts of refractive index
+0.00351, 0.00351                         ! Imaginary part of refractive index
+
+ !  Bimodal control
+
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%do_bimodal                          ! Flag for Bimodal aerosol
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%bimodal_fraction                    ! Bimodal fraction
+
+!  PSD parameters
+
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%PSDindex(1),  GEMSTOOL_INPUTS%MieTmat%PSDindex(2)  ! Mie Particle Size Distribution (PSD) indices
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%PSDpars(1,1), GEMSTOOL_INPUTS%MieTmat%PSDpars(1,2) ! Mie PSD First  parameter values
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%PSDpars(2,1), GEMSTOOL_INPUTS%MieTmat%PSDpars(2,2) ! Mie PSD Second parameter values
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%PSDpars(3,1), GEMSTOOL_INPUTS%MieTmat%PSDpars(3,2) ! Mie PSD Third  parameter values
+
+!  PSD Integration control
+
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%nblocks(1),    GEMSTOOL_INPUTS%MieTmat%nblocks(2)           ! Mie Number of blocks covering the PSDs
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%nweights(1),   GEMSTOOL_INPUTS%MieTmat%nweights(2)          ! Mie Number of Quadrature weights in each block
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%xparticle_limit                              ! Mie Particle size limit
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%FixR1R2(1),    GEMSTOOL_INPUTS%MieTmat%FixR1R2(2)           ! Mie Use particle radius cutoff to fix Rmin/Rmax
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%R1R2_cutoff(1),GEMSTOOL_INPUTS%MieTmat%R1R2_cutoff(2)       ! Mie Particle radius cutoff 
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%R1(1), GEMSTOOL_INPUTS%MieTmat%R1(2)                        ! Mie Minimum particle radii (Microns)
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%R2(1), GEMSTOOL_INPUTS%MieTmat%R2(2)                        ! Mie/Maximum particle radii (Microns)
+
+!  refractive indices
+
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%nreal(1), GEMSTOOL_INPUTS%MieTmat%nreal(2)      ! Mie Real parts of refractive index
+      read(1,*)GEMSTOOL_INPUTS%MieTmat%nimag(1), GEMSTOOL_INPUTS%MieTmat%nimag(2)      ! Mie Imaginary part of refractive index
+
+! End Mie aerosols
+
+      close(1)

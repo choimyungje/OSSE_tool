@@ -1,0 +1,23 @@
+T
+759.0
+761.0
+0.2
+
+
+
+
+754.0
+776.0
+0.2
+
+759.0
+761.0
+0.02
+
+
+   OPEN(1,file=adjustl(trim(ConfigPath))//'GEMSTOOL_Lambdas.cfg',err=90,status='old')
+   read(1,*)GEMSTOOL_INPUTS%Lambdas%do_Monochromatic    ! Flag for standard calculation 10/26/16
+   read(1,*)GEMSTOOL_INPUTS%Lambdas%lambda_start        ! Initial wavelength
+   read(1,*)GEMSTOOL_INPUTS%Lambdas%lambda_finish       ! Final wavelength
+   read(1,*)GEMSTOOL_INPUTS%Lambdas%lambda_wavres       ! Resolution
+   CLOSE(1)

@@ -1,0 +1,19 @@
+T                       ! Bimodal
+0.7                     ! Bimodal_fraction
+4         4             ! Particle Size Distribution indices
+0.07486   0.66712       ! 1st PSD parameter values
+1.61369   2.03970       ! 2nd PSD parameter values
+0.00000   0.00000       ! 3rd PSD parameter values
+10, 10                  ! Number of blocks covering the PSDs
+20, 20                  ! Number of Quadrature weights in each block
+5000.0                  ! Particle size limit
+F, F                    ! Use particle radius cutoff to fix Rmin/Rmax
+1.0E-6, 1.0E-6          ! Particle radius cutoff
+0.0207, 0.0207          ! Minimum particle radii (Microns)
+10.75,  10.75           ! Maximum particle radii (Microns)
+1.47508   1.48209       ! Real parts of refractive index
+0.01112   0.01075       ! Imaginary part of refractive index
+
+
+
+

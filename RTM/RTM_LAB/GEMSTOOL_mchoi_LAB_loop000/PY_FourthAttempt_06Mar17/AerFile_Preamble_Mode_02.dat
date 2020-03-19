@@ -1,0 +1,11 @@
+      Inputs used to create aerosol file (all wvls in nm):
+      Aerosols interpolated: T
+      Aerosol RefWavelength:  500.000
+      Band Lo Wvl  :  340.000   Aero Lo Wvl  :  320.000
+      Band Hi Wvl  :  460.000   Aero Hi Wvl  :  480.000
+      Band Res     :    1.000   Aero Res     :   20.000
+      Band Num Wvls:      121   Aero Num Wvls:        9
+      PSD Index      :         4
+      PSD parameter 1:   0.70540
+      PSD parameter 2:   2.07500
+      PSD parameter 3:   0.00000

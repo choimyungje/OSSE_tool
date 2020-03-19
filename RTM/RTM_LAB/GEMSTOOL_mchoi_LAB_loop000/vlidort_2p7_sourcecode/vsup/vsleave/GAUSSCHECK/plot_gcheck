@@ -1,0 +1,14 @@
+set multiplot
+
+y1 = 0 ; y2 = 1.5 ; y3 = abs(y2-y1)/3
+set xrange[640:840] ; set yrange[y1:y2] ; set ytics y3
+set size 0.9,0.45 ;set origin 0.05,0.5
+plot 'fort.777' using 1:2 notitle w l lt 1 lw 2
+
+y1 = 0 ; y2 = 1.5 ; y3 = abs(y2-y1)/3
+set xrange[755:775] ; set yrange[y1:y2] ; set ytics y3
+set size 0.9,0.45 ;set origin 0.05,0.0
+plot 'fort.777' using 1:2 notitle w l lt 1 lw 2
+
+unset multiplot
+

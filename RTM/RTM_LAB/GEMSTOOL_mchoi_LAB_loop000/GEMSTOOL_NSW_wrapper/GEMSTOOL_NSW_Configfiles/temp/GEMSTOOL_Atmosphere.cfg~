@@ -1,0 +1,16 @@
+T   ! do trace gases
+T   ! do aerosols calculation
+F   ! do aerosols Mie calculation
+F   ! do aerosols T-matrix calculation
+T   ! do User-defined aerosols
+T   ! General Cloud flag
+
+   OPEN(1,file=trim(filnam),err=90,status='old')
+   read(1,*)GEMSTOOL_INPUTS%Atmosph%do_Tracegases         ! turn on, or off do trace gases
+   read(1,*)GEMSTOOL_INPUTS%Atmosph%do_aerosols           ! turn on, or off do aerosols calculation
+   read(1,*)GEMSTOOL_INPUTS%Atmosph%do_Mie_aerosols       ! turn on, or off do aerosols Mie calculation
+   read(1,*)GEMSTOOL_INPUTS%Atmosph%do_Tmat_aerosols      ! turn on, or off do aerosols T-matrix calculation
+   read(1,*)GEMSTOOL_INPUTS%Atmosph%do_User_aerosols      ! turn on, or off User-defined aerosols
+   read(1,*)GEMSTOOL_INPUTS%Atmosph%do_clouds             ! turn on, or off General Cloud flag
+!   read(1,*)GEMSTOOL_INPUTS%Atmosph%do_fileread_wavenums ! turn on special spectrum
+   CLOSE(1)

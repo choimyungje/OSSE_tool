@@ -1,0 +1,198 @@
+
+
+
+C  Table C1: Inputs for LIDORT-RRS Type Structure "LRRS_Fixed_Boolean"
+C  ===================================================================
+
+RRS CONTROL
+===========
+
+LRRS - Do Filling calculation?
+t
+
+LRRS - Do RRS only with primary scatter?
+f
+
+GENERAL CONTROL
+===============
+
+LRRS - Include direct beam?
+t
+
+LRRS - Single scatter nadir correction of all fields?
+f
+
+LRRS - Single scatter outgoing correction of all fields?
+t
+
+LRRS - Single scatter correction alone (no MS)?
+f
+
+LRRS - Molecular scattering atmosphere only?
+f
+
+LRRS - Plane-parallel treatment of direct beam?
+f
+
+LRRS - Include Delta-M scaling?
+t
+
+LRRS - Perform double convergence test?
+t
+
+LRRS - Upwelling output?
+t
+
+LRRS - Downwelling output?
+t
+
+LRRS - Output at layer boundaries?
+t
+
+LRRS - Generate only mean value output?
+f
+
+LRRS - Generate mean value output additionally?
+f
+
+SURFACE CONTROL
+===============
+
+LRRS - BRDF surface?
+f
+
+LRRS - Surface leaving?
+f
+
+LRRS - Isotropic Surface leaving?
+f
+
+DEBUG CONTROL
+=============
+
+LRRS - Input scenario write?
+f
+
+LRRS - Results write?
+f
+
+LRRS - Input control write?
+f
+
+LRRS - Fourier component output write?
+f
+
+#LRRS - Debug write?
+#f
+
+
+
+C  Table C2: Inputs for LIDORT-RRS Type Structure "LRRS_Modified_Boolean"
+C  ======================================================================
+
+RRS CONTROL
+===========
+
+#LRRS - Do Cabannes/Raman treatment?
+#f
+
+LRRS - Do Energy-balancing treatment?
+f
+
+LRRS - Do Inelastic scattering with binning realization?
+t
+
+LRRS - Do Inelastic scattering with monochromatic realization?
+f
+
+GENERAL CONTROL
+===============
+
+LRRS - User-defined stream angles?
+t
+
+LRRS - No azimuth dependence in the solution?
+f
+
+
+
+C  Table C3: Inputs for LIDORT-RRS Type Structure "LRRS_Fixed_Control"
+C  ===================================================================
+
+GENERAL CONTROL
+===============
+
+LRRS - Number of half-space streams
+3
+
+LRRS - Number of fine layers for single scatter outgoing
+2
+
+LRRS - Flux factor
+1.0
+
+LRRS - BOA solar zenith angle (degrees)
+45.0
+
+LRRS - Earth radius
+6371.0
+
+LRRS - Fourier series convergence
+0.0001
+
+LRRS - Small number parameter for Taylor series expansions
+0.00001
+
+LRRS - Ordering parameter for Taylor series expansions
+3
+
+DEBUG CONTROL
+=============
+
+LRRS - filename for input write
+L_Ex1_input.out
+
+LRRS - filename for scenario write
+L_Ex1_scenario.out
+
+LRRS - filename for Fourier output
+L_Ex1_fourier.out
+
+LRRS - filename for main output
+L_Ex1_results.out
+
+
+
+C  Table C4: Inputs for LIDORT-RRS Type Structure "LRRS_Fixed_UserValues"
+C  ======================================================================
+
+LRRS - Number of user-defined stream angles
+1
+
+LRRS - User-defined stream angles
+20.0
+
+LRRS - Number of user-defined relative azimuth angles
+1
+
+LRRS - User-defined relative azimuth angles
+0.0
+
+LRRS - Number of layer boundary output choices
+3
+
+LRRS - Layer boundaries for output (0 = TOA)
+0
+5
+16
+
+#LRRS - Number of partial layer output choices
+#1
+
+#LRRS - Partial layer output choices
+#0.01
+#11.0
+#12.01
+#15.99
+#16.0
+

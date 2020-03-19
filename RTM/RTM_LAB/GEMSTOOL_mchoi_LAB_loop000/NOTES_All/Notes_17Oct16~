@@ -1,0 +1,14 @@
+Transition to Version 2.7 of VLIDORT
+====================================
+
+Only the routine GEMSTOOL_RTInitialize.f90 needed some upgrades.
+   -- Mostly minor. Look for 10/17/16.
+
+None of the other routines needed changing!
+
+Wrappers. Only the Linearized wrappers needed changing. some variables
+in Version 2.6 have been retired and there aer some new variables
+in Version 2.7 which need to initialized (and set - see below).
+
+in each case (UVn or NSW) a new makefile is required to compile
+the VLIDORT Version 2.7 code.

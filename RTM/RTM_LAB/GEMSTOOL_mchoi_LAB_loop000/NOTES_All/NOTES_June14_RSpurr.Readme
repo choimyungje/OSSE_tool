@@ -1,0 +1,113 @@
+June 9th
+@@@@@@@@
+
+Changes in Ukkyo's code from the October Yonsei code.
+=====================================================
+
+In GEMSTOOL_sourcecode/
+-----------------------
+
+       GEMSTOOL_UVN_pthg_profiles.f90. Tshape(n1) dropped from RefTemp
+     < !      level_temps(n1) = reftemp + Tshift *  Tshape(n1)
+     <       level_temps(n1) = reftemp
+
+       GEMSTOOL_UVN_cross_sections.f90
+     Maxspline dimensions increased everywhere......
+
+       GEMSTOOL_UVN_Linearized_iops.f90
+    Addition of the following 2 lines for all gases.
+            dGASOPDEPS_dV(N,G,1) = dGASCOLUMNS_dV(N,G,1) * sig1
+            dGASOPDEPS_dV(N,G,1) = dGASCOLUMNS_dV(N,G,1) * sig2
+
+       GEMSTOOL_AerProperties.f90
+    Addition commented line of output
+
+       GEMSTOOL_Linearized_iops.f90
+    Normalized SURFPWFS was incorrectly labeled as TSHIFTWFS. Should be:
+      RADIANCE_SURFPWFS(V,W) = VLIDORT_LinOut%Col%TS_COLUMNWF(Q,1,V,1,DIR) / SURFPRESS
+
+   .f90
+
+In GEMSTOOL_UVN_Wrapper/
+------------------------
+
+       GEMSTOOL_UVN_Radiance_Master.f90
+Dimension maxwav changed from 301 to 1500
+All Output files now to directory GEMSTOOL_UVN_Results
+
+       GEMSTOOL_UVN_Linearized_Master.f90
+Introduction of number ii
+interpolate aerosols switched off
+Additional output of aerosol DELTAU and SSA to directory GEMSTOOL_UVN_Results
+All Output files now to directory GEMSTOOL_UVN_Results
+ DGASABS_dV array formerly set to 1.0, now calculated in GEMSTOOL_UVN_Linearized_iops.f90
+
+Extension to Aerosol Bulk Property Jacobians in GEMS Code
+=========================================================
+
+Main Developments
+----------------
+
+1. New Module/Subroutine GEMSTOOL_AerProperties_Plus, based on the NASA
+   SIMTOOL module "Aerosol_Jacobian_Creation" [which was modified to
+   account for the GEMSTOOL_INPUTS Type structure, and extended according
+   to the GEMSTOOL specifications (including interpolation)]. This routine
+   generates a whole lot of additional linearized-aerosol outputs which
+   are then used later on to create total optical property linearizations.
+   There is also a separate "aerosol bookkeeping" routine, to keep track
+   of the various aerosol Jacobians.
+
+2. The following routines:
+       GEMSTOOL_UVN_Linearized_iops.f90
+       GEMSTOOL_NSW_Linearized_iops.f90
+   were expanded to digest the new linearized aerosol inputs, and use them to
+   create appropriate linearized total optical properties for VLIDORT.
+
+Associated Secondary changes
+----------------------------
+
+1. GEMSTOOL_Type_Structures.f90 was expanded a little, to include new
+   choices for generating aerosol bulk properties. Only applies to:
+         TYPE(GEMSTOOL_LinControl)     :: LinControl
+
+2. Additional FD (Finite Difference) inputs were added to the existing
+   Module/Subroutine GEMSTOOL_AerProperties, in order to test the new
+   aerosol Jacobians. Look for "FDBul".
+
+3. Makefile was altered to include new module GEMSTOOL_AerProperties_PLUS,
+   and also the linearized Mie and TMatrix codes were included in the
+   compilations.
+
+4. GEMSTOOL_Linearized_RTCALC was expanded a little to include new Aerosol
+   Jacobians ( called RADIANCE_AERBULKWFS )
+
+5. Wrapper tools were expanded to call the bookkeeping routine
+   <<Aerosol_Bookkeep>> and later the <<GEMSTOOL_AerProperties_Plus>>
+   routine. Calculations and Output for RADIANCE_AERBULKWFS.
+  
+6. Configuration file <LinControl> has 1 new "AerBulk_Jacobians" flag, and
+   a new Configuration file <LinControl_AerBulk> was introduced to
+   handle control for the various aerosol bulk-property Jacobians
+
+Major Bug in RTSMie/Tmatrix codes
+=================================
+
+In Both the <<Master_Bimodal_PLUS>> routines.
+The following code for linearizations of the second-mode PSD parameters 
+
+      D1_Csca1(1:nlin) = LPSD_Mie1_bulk(2,1:nlin)
+      D2_Csca2(1:nlin) = LPSD_Mie2_bulk(2,1:nlin)
+      D1_WW1(1:nlin) = FF1 * D1_Csca1(1:nlin) * WW2 / Csca_total
+      D2_WW2(1:nlin) = FF2 * D2_Csca2(1:nlin) * WW1 / Csca_total
+      D1_WW2(1:nlin) = - D1_WW1(1:nlin)
+      D2_WW1(1:nlin) = - D2_WW2(1:nlin)       ! This line was improperly ordered
+
+was wrong. The 6th line (commented) was originally before Line 4, which meant
+that the second-mode PSD-par Jacobians were wrong, but the first-mode PSD-par
+Jacobians were fine. Same thing in the Tmatrix code.
+
+In fact, Mick fixed this bug (01/13/14) in the Mie code that was delivered
+to another customer, but did not fix the corresponding bug in Tmatrix code.
+
+This Bug only applies to the new aerosol Bulk properties.
+
