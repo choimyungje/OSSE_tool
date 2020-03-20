@@ -31,16 +31,17 @@ This program handles all processes to calculate high-spectral-resolution spectra
       - Surface pressure: Stokes_I_SURFPWFs_TOAUP.out (and Q/U)
       - SIF parameters (not used in this study)
       - AOD profile (not used in this study)
-    - Unitless normalized radiance (def. radiance when incident solar radiance at top-of-atmosphere is assumed 1; unity)
+    - Unitless normalized radiance (def. radiance when incident solar radiance at top-of-atmosphere is assumed 1; unity)  
       
-  - Code structures
-    - 1) **osse_aerosol_0_master.pro**   
-      - osse_aerosol_1_cal_pthg.pro
-        - sub_module_setup_pthg_clars_new_multiple.pro
-        - sub_make_xsec_lut_using_absco_v5_mchoi_o2ab_new_multiple.pro
-      - osse_aerosol_2_cal_aodprof.pro
-        - sub_integrate_result_svo_lab_loop.pro
-      - osse_aerosol_3_cal_rtm.pro
-        - sub_integrate_result_svo_lab_loop.pro   
+      
+## 2. Code structures
+- **osse_aerosol_0_master.pro**   
+  - osse_aerosol_1_cal_pthg.pro
+    - sub_module_setup_pthg_clars_new_multiple.pro
+    - sub_make_xsec_lut_using_absco_v5_mchoi_o2ab_new_multiple.pro
+  - osse_aerosol_2_cal_aodprof.pro
+    - sub_integrate_result_svo_lab_loop.pro
+  - osse_aerosol_3_cal_rtm.pro
+    - sub_integrate_result_svo_lab_loop.pro   
 
   
