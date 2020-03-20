@@ -1,15 +1,15 @@
 Pro osse_aerosol_0_master, i_loop_start;, i_case, i_loop_start;, n_loop, wn_interval_read
  
-switch_justcal = 2 ;---w/ jacobian and AOD,PH,HW points??
-switch_constraint_aerosol = 0 ;-fixed
+switch_justcal = 2 ;---keep as "2"
+switch_constraint_aerosol = 0 ;--keep as "0"
  ; 0=starting from a priori (all pars are different w/ true values) ;--used for OSSE information contents analysis
  ; 1=starting from true value for aerosol (identical aerosol pars except for AOD, PH, HW; all different other pars)
  ; 2=starting from all true values (true-in-ture-out test for all pars!)
 
-switch_perturb = 0 ;--keep 0 in this retrieval code (synthetic data generation only; 0=fixed AOD/PH/HW, 1=all random pars)
+switch_perturb = 0 ;--keep as "0"
 ;--
 ;----------------------case selection: default is i_case of 0
-i_case = 0 ;fixed
+i_case = 0 ;--2019/07/05 "WestPasadena" case (cl201907052231West.143)
 
 if i_case eq 0 then begin
 yy_read = 2019 & mm_read = 07 & dd_read = 05 & loc_select_idx_no = 3 ;cl201907052231West.143
@@ -23,7 +23,6 @@ endif
 if i_case eq 3 then begin
 yy_read = 2018 & mm_read = 10 & dd_read = 01 & loc_select_idx_no = 3 ; cl201810012156West.147
 endif
-
 
 AOD_set = [0.5];[0.1, 0.3, 0.5, 1.0] ;[0.3, 1.0];[0.1, 0.3, 0.5, 1.0]
 PH_set  = [1.0];[0.2, 0.6, 1.0, 1.5, 2.0];[1.0, 4.0, 7.0, 10.0]
@@ -332,7 +331,6 @@ if switch_PTHG_cal eq 1 and sign_next_iter ne 2 then begin
   RAA_fin = RAA_all(idx_dat) ;abs(180.0 - abs(SAA_fin - VAA_fin))
   SCA_fin = !radeg*acos(-cos(!dtor*SZA_fin)*cos(!dtor*VZA_fin)+sin(!dtor*SZA_fin)*sin(!dtor*VZA_fin)*cos(!dtor*RAA_fin))
 
-
   str_SZA = strtrim(string(SZA_fin,f='(f05.2)'),2)
   str_VZA = strtrim(string(VZA_fin,f='(f05.2)'),2)
   str_RAA = strtrim(string(RAA_fin,f='(f06.2)'),2)
@@ -572,9 +570,6 @@ for i_band = 0, switch_band_ABD, 1 do begin;
   endif
 
   endif ;if i_band eq 0 then begin
-
-
-
 
 
   ;--step 3) RTM calculation
