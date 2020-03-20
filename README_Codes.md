@@ -2,7 +2,9 @@
 
 Manual to run the simulation of OSSE_aerosol code for information contents analysis of aerosol vertical profiling
 
-## 1. Overall guidance
+## Step 1: High spectral resolution spectrum calculation
+
+### 1. Overall guidance
 This program handles all processes to calculate high-spectral-resolution spectra over O2 absorption bands. 
 - Inputs
   - Set 1: from the practical CLARS-FTS measurement condition over LA basin.  
@@ -33,7 +35,7 @@ This program handles all processes to calculate high-spectral-resolution spectra
   - Unitless normalized radiance (def. radiance when incident solar radiance at top-of-atmosphere is assumed 1; unity)  
 
       
-## 2. Code structures
+### 2. Code structures
 - **osse_aerosol_0_master.pro**   
   - osse_aerosol_1_cal_pthg.pro
     - sub_module_setup_pthg_clars_new_multiple.pro
