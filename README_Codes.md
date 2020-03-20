@@ -3,9 +3,8 @@
 Manual to run the simulation of OSSE_aerosol code for information contents analysis of aerosol vertical profiling
 
 ## 1. Overall guidance  
-  
-- **osse_aerosol_0_master.pro**  
-This "master" code handles all processes to calculate high-spectral-resolution spectra over O2 absorption bands. 
+
+This program handles all processes to calculate high-spectral-resolution spectra over O2 absorption bands. 
   - Inputs
     - Set 1: from the practical CLARS-FTS measurement condition over LA basin.  
       - Solar zenith/azimuth angle
@@ -22,24 +21,25 @@ This "master" code handles all processes to calculate high-spectral-resolution s
       - etc..  
     - Some parameters are controlled from the master code and others are controlled from following codes.
   - Outputs
+    - Location: ./Results/All_Results_justcal/Case000_cl201907052231West/ii0000_AOD0.30_Peak01.0_Width0.3_SZA35.50_VZA00.01_RAA030.00_SCA144.50/LAB_step00/
     - High-spectral-resolution Stokes parameters (i.g., I, Q, and U) with a unit of normalized radiance
     - Jacobians for 
-      - aerosol bulk parameters/or AOD profile
-      - surface parameters
-      - H2O scaling
-      - Temperature shift
-      - Surface pressure
-      - SIF parameters
-    
-    
-Outputs of this simulations are as below.
+      - Aerosol bulk parameters: Stokes_I_AerBulkWFs_TOAUP.out
+      - Surface BRDF parameters: Stokes_I_BRDFWFs_TOAUP.out
+      - H2O scaling: Stokes_I_WSCALEWFs_TOAUP.out 
+      - Temperature shift: Stokes_I_TSHIFTWFs_TOAUP.out
+      - Surface pressure: Stokes_I_SURFPWFs_TOAUP.out
+      - SIF parameters (not used in this study)
+      - AOD profile (not used in this study)
+      
+  - Code structures
+    - 1) **osse_aerosol_0_master.pro**   
+      - osse_aerosol_1_cal_pthg.pro
+        - sub_module_setup_pthg_clars_new_multiple.pro
+        - sub_make_xsec_lut_using_absco_v5_mchoi_o2ab_new_multiple.pro
+      - osse_aerosol_2_cal_aodprof.pro
+        - sub_integrate_result_svo_lab_loop.pro
+      - osse_aerosol_3_cal_rtm.pro
+        - sub_integrate_result_svo_lab_loop.pro   
 
-  - osse_aerosol_1_cal_pthg.pro
-    - sub_module_setup_pthg_clars_new_multiple.pro
-    - sub_make_xsec_lut_using_absco_v5_mchoi_o2ab_new_multiple.pro
-  - osse_aerosol_2_cal_aodprof.pro
-    - sub_integrate_result_svo_lab_loop.pro
-  - osse_aerosol_3_cal_rtm.pro
-    - sub_integrate_result_svo_lab_loop.pro  
-    
   
