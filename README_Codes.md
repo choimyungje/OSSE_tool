@@ -5,15 +5,32 @@ Manual to run the simulation of OSSE_aerosol code for information contents analy
 ## 1. Overall guidance  
   
 - **osse_aerosol_0_master.pro**  
-This "master" code is to handle all processes for calculating high-resolution spectra over O2 absorption bands. The simulation is focused on the real CLARS-FTS measurement over LA basin area, e.g., Solar zenith/azimuth angle, target longitude/latitude, measurement date/time, etc. Other independent variables are as below.  
-  - Measurement geometry: viewing zenith/azimuth angle
-  - Aerosol microphysical properties: size distribution (effective radius/variance, fine-mode fraction), refractive indicies
-  - Aerosol vertical distribution: total AOD, peak height and half width of half maximum of Gaussian shape distribution
-  - Surface reflectance: Lambertian surface reflectance, BRDF, or BRDF+BPDF
-  - Atmospheric vertical layer/resolution: pressure-temperature-height profile, gases profile
-  - Number of streams for DISORT calculation 
-  - Spectral range/resolution
-  - 
+This "master" code handles all processes to calculate high-spectral-resolution spectra over O2 absorption bands. 
+  - Inputs
+    - Set 1: from the practical CLARS-FTS measurement condition over LA basin.  
+      - Solar zenith/azimuth angle
+      - target longitude/latitude
+      - measurement date/time
+    - Set 2: that can be changed  
+      - Measurement geometry: viewing zenith/azimuth angle
+      - Aerosol microphysical properties: size distribution (effective radius/variance, fine-mode fraction), refractive indicies
+      - Aerosol vertical distribution: total AOD, peak height and half width of half maximum of Gaussian shape distribution
+      - Surface reflectance: Lambertian surface reflectance, BRDF, or BRDF+BPDF
+      - Atmospheric vertical layer/resolution: pressure-temperature-height profile, gases profile
+      - Number of streams for DISORT calculation 
+      - Spectral range/resolution
+      - etc..  
+    - Some parameters are controlled from the master code and others are controlled from following codes.
+  - Outputs
+    - High-spectral-resolution Stokes parameters (i.g., I, Q, and U) with a unit of normalized radiance
+    - Jacobians for 
+      - aerosol bulk parameters/or AOD profile
+      - surface parameters
+      - H2O scaling
+      - Temperature shift
+      - Surface pressure
+      - SIF parameters
+    
     
 Outputs of this simulations are as below.
 
