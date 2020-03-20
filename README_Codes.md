@@ -2,8 +2,16 @@
 
 Manual to run the simulation of OSSE_aerosol code for information contents analysis of aerosol vertical profiling
 
-## 1. Overall guidance  
-
+## 1. Overall guidance 
+Corresponding codes
+- **osse_aerosol_0_master.pro**
+  - osse_aerosol_1_cal_pthg.pro
+    - sub_module_setup_pthg_clars_new_multiple.pro
+    - sub_make_xsec_lut_using_absco_v5_mchoi_o2ab_new_multiple.pro
+  - osse_aerosol_2_cal_aodprof.pro
+    - sub_integrate_result_svo_lab_loop.pro
+  - osse_aerosol_3_cal_rtm.pro
+    - sub_integrate_result_svo_lab_loop.pro   
 This program handles all processes to calculate high-spectral-resolution spectra over O2 absorption bands. 
   - Inputs
     - Set 1: from the practical CLARS-FTS measurement condition over LA basin.  
@@ -19,7 +27,7 @@ This program handles all processes to calculate high-spectral-resolution spectra
       - Number of streams for DISORT calculation 
       - Spectral range/resolution
       - etc..  
-    - Some parameters are controlled from the master code and others are controlled from following codes.
+    - The parameters are controlled by the master code and others following codes.
   - Outputs
     - Location (e.g.): ./Results/All_Results_justcal/Case000_cl201907052231West/ii0000_AOD0.30_Peak01.0_Width0.3_SZA35.50_VZA00.01_RAA030.00_SCA144.50/LAB_step00/
     - Stokes parameters (I, Q, and U) with a unit of normalized radiance: Stokes_IQU_DoLP_TOAUP.out
