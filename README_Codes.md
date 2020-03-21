@@ -46,4 +46,4 @@ This program handles all processes to calculate high-spectral-resolution spectra
     - sub_integrate_result_svo_lab_loop.pro   
 
   
-## Step 2. 
+## Step 2. Estimation of information contents and retrieval uncertainty
