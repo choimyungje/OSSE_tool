@@ -72,5 +72,14 @@ Instrument characteristics are considered. e.g., Specific signal-to-noise ratio 
       - Smoothing error
       - Measurement noise error
       - Cross-state error (or, interference error)
-  - Retrieval bias estimation due to measurement bias
+  - Estimated retrieval bias due to measurement bias
   
+### 2. Code structures
+- Location: ./Analysis_DOFS
+- analysis_dofs_satellite_nadir_ab_tropomi.pro 
+  - output location: (e.g.) ./Analysis_DOFS/result_satellite_nadir_ab_tropomi/save_AOD0.10_Peak00.2_Width0.2/DFS_RelE.xdr
+  - 100 aerosol loading cases: AOD [0.1, 0.3, 0.5, 1.0]; APH [0.2, 0.6, 1.0, 1.5, 2.0 km]; ALT [0.2, 0.6, 1.0, 1.5, 2.0 km]  
+  - 
+  - 
+  ...
+- 
