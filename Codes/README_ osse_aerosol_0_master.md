@@ -43,6 +43,10 @@
 
 - l369-374: declare 'Temperature shift' value as 0.01 K 
 
-- l
+- line 376-381: flushing output results
+
+- line 385-398: use 'osse_aerosol_1_cal_pthg' function to prepare a Pressure-Temperature-Height-Gases profile
+
+- line 401-439: Generally, the various scenarios calculated at once share a common PTHG profile and just have different aerosols or viewing geometry scenarios. Therefore, from 2nd scenario, the PTHG calculated for the 1st scenario is copied and used.
 
 
