@@ -23,6 +23,26 @@
 
 - l91: 'i_loop_start' is multipled by 10. Therefore, the 2nd set of cases will be calculated by using RTM010~, and the 3rd set of cases will be run by using RTM020~.
 
-- l150: 
+- l150: 'n_loop': the number of runs within each node (from 1 to 10). If 'n_loop' is 5, 'i_loop_start' is 1 (-> RTM starts from 010), then the RTMs 010, 011, 012, 013, 014 are used.
+
+- l151: 'w_interval_read': spectral resolution of high resolution calculation. This is set as 0.02 cm-1 for the OSSEs, but can be changed. It changes the calculation time.
+
+- l152: 'i_prof': '0' is for aerosol bulk Jacobian (including Gaussian shape vertical distribution parameters; peak height and half width half maximum); '1' is for AOD profile Jacobian (i.e., Jaocibians for layer by layer AOD).
+
+- l178: 'workspace_pwd': location of the highest directory for this work ("OSSE_tool" folder)
+
+- l201-: Read CLARS-FTS measurement log file and extract location information 
+  - i.e., SNR, Solar zenith angle (SZA), Solar azimuth angle (SAA), Time, surface pressure and temperature at CLARS location
+  - VZA and viewing azimuth angle are provided, but we don't use them for satellite but use the values defined at l32-33.
+  
+- l288: A default CLARS target is 'WestPasadena'. Other site can be used. The name of sites are based on the CLARS-FTS measurement log file.
+
+- l295-308: defining location for output results
+
+- l323-362: save setting information of geometry, time, and location.
+
+- l369-374: declare 'Temperature shift' value as 0.01 K 
+
+- l
 
 
