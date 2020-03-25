@@ -46,4 +46,40 @@ This program handles all processes to calculate high-spectral-resolution spectra
     - sub_integrate_result_svo_lab_loop.pro   
 
   
-## Step 2. 
+## Step 2. Estimation of information contents and retrieval uncertainty  
+
+### 1. Overall guidance
+This process calculates information contents (i.e., degree of freedom for signal; DOFS) of geophyeical parameters and its retrieval uncertainties for aerosol profiling parameters and other parameters.  
+Instrument characteristics are considered. e.g., Specific signal-to-noise ratio (SNR) and spectral resolution (i.e., full-width-half-maximum; FWHM)
+- Inputs
+  - High-resolution (e.g., 0.02 cm-1 in this study) spectra calculated from Step 1.  
+    - Stokes parameters
+    - Jacobians
+  - A priori uncertainty
+    - Aerosol/Surface/other ancilliary parameters uncertainty
+    - They can be analyzed from the standard deviation of climatological database
+    - Or, they also can be defined as specific number (e.g., 100%)
+  - Instrument model
+    - Instrument line shape function: SINC function (for FTS-type), Gaussian function (for grating-type)
+    - Signal-to-noise ratio (SNR) for radiance (I): e.g., 100-1000
+    - SNR for Q and U (i.e., assumed as SNR of radiance / sqrt(2) in this study)
+    - Measurement noise can be defined as signal / SNR, or other definition can be used.
+- Outputs
+  - Averaging Kernels
+  - Degree of freedom for signal (DOFS) for each geophysical parameters
+  - A posterior error
+    - Total retrieval error
+      - Smoothing error
+      - Measurement noise error
+      - Cross-state error (or, interference error)
+  - Estimated retrieval bias due to measurement bias
+  
+### 2. Code structures
+- Location: ./Analysis_DOFS
+- analysis_dofs_satellite_nadir_ab_tropomi.pro 
+  - output location: (e.g.) ./Analysis_DOFS/result_satellite_nadir_ab_tropomi/save_AOD0.10_Peak00.2_Width0.2/DFS_RelE.xdr
+  - 100 aerosol loading cases: AOD [0.1, 0.3, 0.5, 1.0]; APH [0.2, 0.6, 1.0, 1.5, 2.0 km]; ALT [0.2, 0.6, 1.0, 1.5, 2.0 km]  
+  - 
+  - 
+  ...
+- 
