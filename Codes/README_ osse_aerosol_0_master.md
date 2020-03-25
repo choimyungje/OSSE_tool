@@ -43,10 +43,18 @@
 
 - l369-374: declare 'Temperature shift' value as 0.01 K 
 
-- line 376-381: flushing output results
+- l376-381: flushing output results
 
-- line 385-398: use 'osse_aerosol_1_cal_pthg' function to prepare a Pressure-Temperature-Height-Gases profile
+- l385-398: use 'osse_aerosol_1_cal_pthg' function to prepare a Pressure-Temperature-Height-Gases profile
 
-- line 401-439: Generally, the various scenarios calculated at once share a common PTHG profile and just have different aerosols or viewing geometry scenarios. Therefore, from 2nd scenario, the PTHG calculated for the 1st scenario is copied and used.
+- l401-464: Generally, the various scenarios calculated at once share a common PTHG profile and just have different aerosols or viewing geometry scenarios. Therefore, from 2nd scenario, the PTHG calculated for the 1st scenario is copied and used.
 
+- l468: for loop iteration for bands: O2 A (0), B (1), 1∆ (2)
+
+- l471-493: wavenumber range for each band.
+
+- l521-536: allocating the individual monochromatic channels to different codes.
+  - 'wn0_loop' and 'wn1_loop' contain the first and last wavenumber for each groups.
+  - e.g., 12900-13000 can be divided by 12900-12910, 12910-12920, ..,., 12990-13000.
+  
 
