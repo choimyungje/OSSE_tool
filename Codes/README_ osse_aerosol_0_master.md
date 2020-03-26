@@ -1,8 +1,9 @@
 # README: osse_aerosol_0_master.pro
 
-## 1. 
+## 1. General description
+- The master code to calculate high-resolution monochromatic spectra of Stokes parameters and Jacobian
 
-### 1. 
+### 1. Detailed description
 - l0: 'i_loop_start' will be 0, 1, 2, .., etc. The code aims to calculate multiple aerosol scenarios by using multiple nodes of machine (i.e., isoprene tb1 to tb 24). the number of loop will be defined later. 
 
 - l12: i_case = 0 to 3. There are each CLARS measurement cases of four different seasons and sites. (It will determine measurement time, solar zenith/azimuth angle; viewing zenith/azimuth angle if we want to simulate CLARS-FTS LABS measurement mode, not satellite).  
@@ -45,7 +46,7 @@
 
 - l376-381: flushing output results
 
-- l385-398: use 'osse_aerosol_1_cal_pthg' function to prepare a Pressure-Temperature-Height-Gases profile
+- l385-398: execute a procedure of '**osse_aerosol_1_cal_pthg**' to prepare a Pressure-Temperature-Height-Gases profile
 
 - l401-464: Generally, the various scenarios calculated at once share a common PTHG profile and just have different aerosols or viewing geometry scenarios. Therefore, from 2nd scenario, the PTHG calculated for the 1st scenario is copied and used.
 
@@ -57,4 +58,13 @@
   - 'wn0_loop' and 'wn1_loop' contain the first and last wavenumber for each groups.
   - e.g., 12900-13000 can be divided by 12900-12910, 12910-12920, ..,., 12990-13000.
   
+- l542-572: execute a procedure of '**osse_aerosol_2_cal_aodprof**' to calculate aerosol profile and testing run just two wavenumber points
+
+- line 565: execute a procedure of '**sub_integrate_result_svo_lab_loop**' to integrate a piece of results from different run codes within each node
+
+- line 575-633: execute a procedure of '**osse_aerosol_3_cal_rtm**' to calculate Stokes parameters and Jacobians. Total 'n_loop' codes are executed using for different sub-group wavenumber range.
+
+- line 627: execute a procedure of '**sub_integrate_result_svo_lab_loop**' to integrate a piece of results from different run codes within each node
+
+
 
