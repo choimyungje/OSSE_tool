@@ -112,7 +112,7 @@ i_combo_fin = 0
 for i_combo = i_combo_ini, i_combo_fin do begin
 
 
-SysB_I = 1.00d ;- 0.04d ;1.00+0.04; or 1.00-0.04
+SysB_I = 1.00d ; meaningless here; - 0.04d ;1.00+0.04; or 1.00-0.04
 
 ; if i_combo eq i_combo_ini then switch_Syn_noiseadd = 1 ;or 2
 ; if i_combo ne i_combo_ini then switch_Syn_noiseadd = 0
@@ -151,8 +151,8 @@ n_loop = 10;6 ;8 ;--number of cpu to use within each node (e.g., tb1); physical 
 wn_interval_read = 0.1 ;--interval of spectrum (monochromatic spectra)
 i_prof = 0 ;---Jacobian calculation for Aerosol Bulk (0) vs AOD profile (1)
 
-nn = 0 ;--number of iteration for convergence test..; default setting is "zero(0)" for 
-sign_next_iter = 0 ;--initialization of for convergence flag using "retrieval" mode; not used in DOFS calculation mode
+nn = 0 ;meaningless, --number of iteration for convergence test..; default setting is "zero(0)" for 
+sign_next_iter = 0 ;meaningless, ;--initialization of for convergence flag using "retrieval" mode; not used in DOFS calculation mode
 
 
 ; ;--target of synthetic data
@@ -194,11 +194,11 @@ workspace_pwd = '/home/mchoi/OSSE_tool'
 ;                 'WestPasadena','SantaMonicaMountains','Glendale','UniversalCityNew','ShermanOaks', $
 ;                 'WoodlandHills','VanNuysAirPort','CanogaPark', 'Northridge']
 ;---readcol site information
-restore, '/home/mchoi/OSSE_tool/Datasets/data_CLARS_FTS/save_target_info/save_target_info.xdr'
+restore, workspace_pwd + '/Datasets/data_CLARS_FTS/save_target_info/save_target_info.xdr'
 ; save, loc_set, lat_set, lon_set, alt_set, VZA_set, VAA_set, $
-;       filename = save_pwd +'/save_target_info.xdr'
+;       filename = save_pwd +'/save_taraget_info.xdr'
 
-CLARSFTS_pwd = '/home/mchoi/OSSE_tool/Datasets/data_CLARS_FTS'
+CLARSFTS_pwd = workspace_pwd + '/Datasets/data_CLARS_FTS'
 
 str_yy_read = string(yy_read,f='(i4.4)')
 str_mm_read = string(mm_read,f='(i2.2)')
